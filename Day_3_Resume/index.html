@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upendra Shah — Portfolio</title>
+<style>
+  :root {
+    --bg: #EEF1F4;
+    --panel: #FFFFFF;
+    --ink: #1C2733;
+    --ink-soft: #55636F;
+    --accent-deep: #0F3D5C;
+    --line: #C3CCD3;
+    --grid: rgba(15,61,92,0.06);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Arial, sans-serif;
+    background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+
+    background-size: 30px 28px;
+  }
+
+  .wrap {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 24px;
+    background: var(--panel);
+    border-radius: 16px;
+  }
+
+  header {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--accent-deep);
+  padding: 32px;
+  margin-bottom: 24px;
+}
+header h1 {
+  font-family: 'Courier New', monospace;
+  margin: 0 0 6px;
+  font-size: 2em;
+}
+
+header p {
+  margin: 0;
+  color: var(--ink-soft);
+}
+section {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 28px 32px;
+  margin-bottom: 20px;
+}
+
+ /* For table */
+ table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95em;
+}
+
+th {
+  text-align: left;
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding: 0 10px 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+td {
+  padding: 10px 10px 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85em;
+  padding: 5px 10px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+}
+.social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input,
+textarea {
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg);
+  width: 100%;
+}
+
+button {
+  width: fit-content;
+  padding: 10px 20px;
+  border: none;
+  background: var(--accent-deep);
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0b2f47;
+}
+
+.social a {
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+  text-decoration: none;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  padding: 8px 14px;
+  background: var(--bg);
+}
+
+.social a:hover {
+  border-color: var(--accent-deep);
+  color: var(--accent-deep);
+}
+
+footer {
+  text-align: center;
+  font-size: 0.8em;
+  color: var(--ink-soft);
+  margin-top: 30px;
+}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Upendra Shah</h1>
+    <p>B.Sc. CSIT Student — Kathmandu, Nepal</p>
+  </header>
+
+  <section>
+    <h2>About Me</h2>
+    <p>I'm a B.Sc. CSIT student who likes building systems end to end rather than
+    stopping at the assignment brief. Recent work includes a voice assistant built
+    with React and FastAPI, and a gRPC-based plugin runtime written in Go. My
+    coursework covers Advanced Java, Software Project Management, and Data
+    Warehousing & Data Mining.</p>
+  </section>
+
+  <section>
+    <h2>Education</h2>
+    <table>
+      <tr><th>Period</th><th>Program</th><th>Institution</th></tr>
+      <tr><td>[2023]-[Running]</td><td>B.Sc. CSIT</td><td>[Bhaktapur Multiple Campus]</td></tr>
+      <tr><td>[2021]-[2023]</td><td>+2 Science</td><td>[CCRC]</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>Skills</h2>
+    <div class="tags">
+      <span class="tag">Java</span>
+      <span class="tag">Go</span>
+      <span class="tag">Python (FastAPI)</span>
+      <span class="tag">React</span>
+      <span class="tag">PostgreSQL</span>
+      <span class="tag">gRPC</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+
+    <form id="contact-form">
+      <div>
+        <label for="name">Name</label>
+        <input type="text" id="name" required>
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" required>
+      </div>
+      <div>
+        <label for="message">Message</label>
+        <textarea id="message" rows="4" required></textarea>
+      </div>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Elsewhere</h2>
+    <div class="social">
+      <a href="https://github.com/UpendraShah7" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
+      <a href="mailto:your.hastashah98@gmail.com">Email</a>
+    </div>
+  </section>
+
+  <footer>&copy; <span id="year"></span> Upendra Shah</footer>
+</div>
+</body>
+</html>
