@@ -6,20 +6,21 @@
 
 .con{
     height : 400px;
+    margin-bottom: 20px;
     background: skyblue;
-    /* display: flex; */
     display: flex;
-
-    flex-direction: row;
+    /* flex , inline-flex */
+    flex-direction: column;
     /* row cloumn rowreverse columnreverse */
     flex-wrap: wrap;
    /* wrap nowrap wrapreverse */
+   
    /* flex flow : direction + wrap shorthand */
 
    justify-content: center;
    /* start end center space-between space-around spacevenly */
 
-   align-items: center;
+   align-items: end;
    /* stretch start end center baseline */
    align-content: center;
    /* start end center space-between space-around spacevenly */
@@ -82,3 +83,7 @@
     flex: 1;
     align-self: stretch;
 }
+
+
+
+
