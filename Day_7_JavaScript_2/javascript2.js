@@ -62,3 +62,21 @@ console.log(marvel_heros.slice(1,3));
 //Syntax: array.splice(start, deleteCount, item1, item2, ...)
 marvel_heros.splice(2, 0, "Black Panther", "Doctor Strange");
 console.log(marvel_heros);
+
+
+let heroeees = ["Ironman", "Thor", "Hulk"];
+console.log(heroeees.includes("Thor")); 
+console.log(heroeees.indexOf("Hulk"));  
+console.log(heroeees.indexOf("Batman")); 
+
+let heroess = ["Thor", "Ironman", "Hulk", "Batman"];
+
+console.log(heroess.sort());
+// ["Batman", "Hulk", "Ironman", "Thor"]  ← alphabetical order
+
+console.log(heroess.reverse());
+// ["Thor", "Ironman", "Hulk", "Batman"]  ← reverses current order
+
+
+
+

@@ -66,6 +66,16 @@ console.log(str.trim());
 
 
 
+let text = "  Hello JavaScript  ";
+
+console.log(text.toUpperCase());        
+console.log(text.toLowerCase());          
+console.log(text.trim());                
+console.log(text.includes("Script"));     
+console.log(text.indexOf("l"));          
+console.log(text.replace("Java", "Type"));
+
+
 
 //3.Template literals in js
 let name = "Upendra";
