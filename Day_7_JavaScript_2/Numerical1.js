@@ -1,3 +1,5 @@
+//Write a program that accepts an array of numbers and calculates the sum of all elements.
+
 let input = prompt("Enter numbers separated by commas:");
 
 let numbers = input.split(",").map(Number);

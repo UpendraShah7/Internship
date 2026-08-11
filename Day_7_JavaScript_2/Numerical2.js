@@ -1,3 +1,6 @@
+// Create a program that finds and prints the largest number in a given array.
+
+
 let numbers = prompt("Enter numbers separated by commas:")
     .split(",")
     .map(Number);
