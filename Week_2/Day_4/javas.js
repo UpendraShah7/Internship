@@ -138,14 +138,3 @@ console.log(newStudent);
 
 
 //Updating an object property
-let student = {
-    name: "Ups",
-    age: 22
-};
-
-let updatedStudent = {
-    ...student,
-    age: 23
-};
-
-console.log(updatedStudent);
