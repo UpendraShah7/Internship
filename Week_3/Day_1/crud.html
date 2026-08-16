@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Management System</title>
+    <link rel="stylesheet" href="crud.css" />
+  </head>
+  <body>
+    <div class="page">
+      <h1>User Management System (Fake API)</h1>
+      <button id="btn-new-user" class="btn-primary">Create New User</button>
+
+      <!-- // Create Form -->
+      <div
+        class="card"
+        id="create-form"
+        style="display: none; margin-bottom: 20px"
+      >
+        <h2>Create New User</h2>
+        <div class="row">
+          <input id="c-first" placeholder="First name" />
+          <input id="c-last" placeholder="Last name" />
+          <input id="c-email" placeholder="Email" />
+          <input id="c-username" placeholder="Username" />
+          <input id="c-password" placeholder="Password" type="password" />
+          <input id="c-phone" placeholder="Phone" />
+          <input id="c-city" placeholder="City" />
+        </div>
+        <button
+          id="btn-submit-create"
+          class="btn-primary"
+          style="margin-top: 12px"
+        >
+          Save User
+        </button>
+        <div class="status" id="create-status"></div>
+      </div>
+
+      <!-- // Edit form -->
+      <div
+        class="card"
+        id="edit-form"
+        style="display: none; margin-bottom: 20px"
+      >
+        <h2>Edit User</h2>
+        <input type="hidden" id="e-id" />
+        <div class="row">
+          <input id="e-first" placeholder="First name" />
+          <input id="e-last" placeholder="Last name" />
+          <input id="e-email" placeholder="Email" />
+          <input id="e-phone" placeholder="Phone" />
+          <input id="e-city" placeholder="City" />
+        </div>
+        <button
+          id="btn-submit-edit"
+          class="btn-primary"
+          style="margin-top: 12px"
+        >
+          Save Changes
+        </button>
+        <button id="btn-cancel-edit" style="margin-top: 12px">Cancel</button>
+        <div class="status" id="edit-status"></div>
+      </div>
+
+      <div class="card">
+        <h2>User List</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Full Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>City</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="user-table-body">
+            <tr>
+              <td colspan="5">Loading…</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="table-footer">
+          <span>Total 1 users</span>
+
+          <div class="pagination">
+            <button class="page-arrow">&lt;</button>
+            <span class="page-num">1</span>
+            <button class="page-arrow">&gt;</button>
+            <select class="page-size">
+              <option>10 / page</option>
+              <option>20 / page</option>
+              <option>50 / page</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="crud.js"></script>
+  </body>
+</html>

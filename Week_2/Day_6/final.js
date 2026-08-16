@@ -24,6 +24,10 @@ function renderUsers(users) {
                 ${user.email}<br>
                 ${user.phone}<br>
                 ${user.website}
+
+                <button class="viewDetails" data-id="${user.id}">
+                    View Details
+                </button>
             </p>
         `;
     });
@@ -41,7 +45,7 @@ function fillUsernameDropdown() {
 }
 
 async function fetchUsers() {
-    userList.innerHTML = `<div class="spinner"></div>`;  // spinner shown
+    userList.innerHTML = `<div class="spinner"></div>`;
 
     try {
         const response = await fetch("https://jsonplaceholder.typicode.com/users");
@@ -53,7 +57,7 @@ async function fetchUsers() {
         const users = await response.json();
 
         allUsers = users;
-        renderUsers(allUsers);      // replace spinner on success.
+        renderUsers(allUsers);
         fillUsernameDropdown();
     } catch (error) {
         userList.innerHTML = "<p>Unable to load users. Please try again.</p>";
@@ -106,4 +110,28 @@ usernameFilter.addEventListener("change", () => {
     });
 
     renderUsers(filteredByUsername);
+});
+
+// view details
+userList.addEventListener("click", (event) => {
+
+    if (event.target.classList.contains("viewDetails")) {
+
+        const userId = event.target.dataset.id;
+
+        const user = allUsers.find(user => user.id == userId);
+
+        userList.innerHTML = `
+            <p>
+                <strong>${user.name}</strong><br><br>
+
+                Full Address: ${user.address.street}, ${user.address.suite}<br>
+                City: ${user.address.city}<br>
+                Company: ${user.company.name}<br>
+                Phone: ${user.phone}<br>
+                Website: ${user.website}
+            </p>
+        `;
+    }
+
 });
