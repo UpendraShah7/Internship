@@ -8,6 +8,8 @@ const student = {
     }
 };
 
+
+// A special property is called prototype. which is also an object.
 // Prototype reference to an Object
 // Classes themselves use prototypes internally.
 //Creating prototypes in js
@@ -49,4 +51,58 @@ Prakash.__proto__= Employee;
 
 
 // Classess
+// classes are  program-code template for creating objects.
 
+class TyotaCar{
+
+    constructor(brand ,milege){
+        console.log("Creating new objects");
+        this.brand = brand ;
+        this.milege = milege;
+    }
+
+
+    start(){
+        console.log("start");
+    }
+
+    stop(){
+        console.log("stop");
+
+    }
+}
+let fortuner = new TyotaCar("fortuner" , 20); 
+let lexus = new TyotaCar("lexus" , 10);
+
+
+
+
+// constuctor() method is used to initialize objects.
+
+//Inheritence
+class Car {
+    start() {
+        console.log("Car started");
+    }
+
+    stop() {
+        console.log("Car stopped");
+    }
+}
+
+class Toyota extends Car {
+    constructor(brand) {
+        super();  
+        this.brand = brand;
+    }
+
+    showBrand() {
+        console.log(this.brand);
+    }
+}
+
+let fortuner = new Toyota("Fortuner");
+
+fortuner.start();      // Car started
+fortuner.stop();       // Car stopped
+fortuner.showBrand();  // Fortuner
