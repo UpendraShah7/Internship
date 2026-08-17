@@ -31,3 +31,18 @@ async function getAllData() {
 }
 
 //Promise Chain
+async function getUsers(){
+    try{
+    const response = await fetch(URL);
+    if (!response.ok){
+        console.log("error")
+        return;
+    }
+    const data= await response.json();
+    console.log(data);
+    }
+
+    catch(e){
+        console.log("error", e)
+    }
+}

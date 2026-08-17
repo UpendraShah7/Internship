@@ -100,6 +100,12 @@ document
     };
 
     try {
+      function randomNumber() {
+        return Math.floor(Math.random() * 901) + 100;
+      }
+
+      console.log(randomNumber());
+
       const res = await fetch(`${URL}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -114,13 +120,13 @@ document
 
       const newUser = {
         ...payload,
-        id: data.id,
+        id: randomNumber(),
       };
 
       allUsers.push(newUser);
       renderUsers(allUsers);
 
-      statusEl.textContent = `Created user with id ${data.id}`;
+      statusEl.textContent = `Created user with id ${randomNumber()}`;
       statusEl.className = 'status show ok';
     } catch (err) {
       statusEl.textContent = `Create failed: ${err.message}`;
@@ -211,7 +217,7 @@ document
 document
   .getElementById('user-table-body')
   .addEventListener('click', async (e) => {
-    if (!e.target.classList.contains('btn-delete')) retur;
+    if (!e.target.classList.contains('btn-delete')) return;
 
     const id = e.target.dataset.id;
     const confirmed = confirm('Are you sure?');
@@ -223,7 +229,7 @@ document
       if (res.status === 404) throw new Error('User not found');
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-      // fakestoreapi doesn't persist, so remove locally
+      // Removing locally
       allUsers = allUsers.filter((u) => u.id !== Number(id));
       renderUsers(allUsers);
     } catch (err) {
@@ -231,3 +237,6 @@ document
       console.error(`Request failed: ${err.message}`);
     }
   });
+
+
+  
