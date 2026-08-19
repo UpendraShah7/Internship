@@ -77,7 +77,7 @@ function infiniteLoop(): never {
 }
 
 
-//Interface
+//Interface object ko shape banxa
 interface User {
     name: string;
     email: string;
@@ -163,6 +163,8 @@ function addNumbers(...numbers: number[]): number {
 
  return total;
 }
+
+
 
 
 

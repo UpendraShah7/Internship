@@ -11,56 +11,54 @@
       <h1>User Management System (Fake API)</h1>
       <button id="btn-new-user" class="btn-primary">Create New User</button>
 
-      <!-- // Create Form -->
       <div
         class="card"
-        id="create-form"
+        id="user-form"
         style="display: none; margin-bottom: 20px"
       >
-        <h2>Create New User</h2>
+        <h2 id="form-title">Create New User</h2>
+        <input type="hidden" id="u-id" />
         <div class="row">
-          <input id="c-first" placeholder="First name" />
-          <input id="c-last" placeholder="Last name" />
-          <input id="c-email" placeholder="Email" />
-          <input id="c-username" placeholder="Username" />
-          <input id="c-password" placeholder="Password" type="password" />
-          <input id="c-phone" placeholder="Phone" />
-          <input id="c-city" placeholder="City" />
+          <div class="field">
+            <label for="u-first">First name</label>
+            <input id="u-first" />
+          </div>
+          <div class="field">
+            <label for="u-last">Last name</label>
+            <input id="u-last" />
+          </div>
+          <div class="field">
+            <label for="u-email">Email</label>
+            <input id="u-email" />
+          </div>
+          <div class="field" id="u-username-field">
+            <label for="u-username">Username</label>
+            <input id="u-username" />
+          </div>
+          <div class="field" id="u-password-field">
+            <label for="u-password">Password</label>
+            <input id="u-password" type="password" />
+          </div>
+          <div class="field">
+            <label for="u-phone">Phone</label>
+            <input id="u-phone" />
+          </div>
+          <div class="field">
+            <label for="u-city">City</label>
+            <input id="u-city" />
+          </div>
         </div>
         <button
-          id="btn-submit-create"
+          id="btn-submit-user"
           class="btn-primary"
           style="margin-top: 12px"
         >
           Save User
         </button>
-        <div class="status" id="create-status"></div>
-      </div>
-
-      <!-- // Edit form -->
-      <div
-        class="card"
-        id="edit-form"
-        style="display: none; margin-bottom: 20px"
-      >
-        <h2>Edit User</h2>
-        <input type="hidden" id="e-id" />
-        <div class="row">
-          <input id="e-first" placeholder="First name" />
-          <input id="e-last" placeholder="Last name" />
-          <input id="e-email" placeholder="Email" />
-          <input id="e-phone" placeholder="Phone" />
-          <input id="e-city" placeholder="City" />
-        </div>
-        <button
-          id="btn-submit-edit"
-          class="btn-primary"
-          style="margin-top: 12px"
-        >
-          Save Changes
+        <button id="btn-cancel-form" style="margin-top: 12px; display: none">
+          Cancel
         </button>
-        <button id="btn-cancel-edit" style="margin-top: 12px">Cancel</button>
-        <div class="status" id="edit-status"></div>
+        <div class="status" id="form-status"></div>
       </div>
 
       <div class="card">
@@ -100,6 +98,6 @@
       </div>
     </div>
 
-    <script src="crud.js"></script>
+    <script type="module" src="crud.js"></script>
   </body>
 </html>
