@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/UpendraShah7/Internship#readme",
   "devDependencies": {
-    "prettier": "^3.9.6"
+    "prettier": "^3.9.6",
+    "ts-node": "^10.9.2",
+    "typescript": "^7.0.2"
   }
 }
