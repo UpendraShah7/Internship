@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Management System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="top-bar">
+        <div>
+          <h1 class="brand-title">Product Management System</h1>
+        </div>
+      </header>
+
+      <div class="toolbar">
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Search by name or description…"
+        />
+        <select id="category-filter">
+          <option value="All">All categories</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Clothing">Clothing</option>
+          <option value="Food">Food</option>
+          <option value="Books">Books</option>
+          <option value="Home">Home</option>
+          <option value="Other">Other</option>
+        </select>
+        <select id="status-filter">
+          <option value="All">All statuses</option>
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+          <option value="OutOfStock">Out of stock</option>
+          <option value="Discontinued">Discontinued</option>
+        </select>
+        <select id="sort-field">
+          <option value="name">Sort: Name</option>
+          <option value="price">Sort: Price</option>
+          <option value="stock">Sort: Stock</option>
+        </select>
+        <button id="sort-order" class="btn btn-ghost">↑ Asc</button>
+        <button id="add-product-btn" class="btn">+ Add product</button>
+      </div>
+
+      <div class="count-line" id="product-count">0 of 0</div>
+
+      <table class="ledger">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="product-table-body"></tbody>
+      </table>
+
+      <div id="empty-state">
+        <strong>No products match these filters.</strong>
+        <span>Try clearing the search or filters, or add a new product.</span>
+      </div>
+    </div>
+
+    <div class="panel-overlay" id="panel-overlay"></div>
+    <aside class="panel" id="form-panel">
+      <h2 id="panel-title">Add product</h2>
+      <div id="form-errors"></div>
+      <form id="product-form">
+        <div class="field">
+          <label for="f-name">Name</label>
+          <input id="f-name" name="name" type="text" required />
+        </div>
+        <div class="field">
+          <label for="f-description">Description (optional)</label>
+          <textarea id="f-description" name="description"></textarea>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="f-price">Price</label>
+            <input
+              id="f-price"
+              name="price"
+              type="number"
+              step="0.01"
+              min="0"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="f-stock">Stock</label>
+            <input
+              id="f-stock"
+              name="stock"
+              type="number"
+              step="1"
+              min="0"
+              required
+            />
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-category">Category</label>
+          <select id="f-category" name="category">
+            <option value="Electronics">Electronics</option>
+            <option value="Clothing">Clothing</option>
+            <option value="Food">Food</option>
+            <option value="Books">Books</option>
+            <option value="Home">Home</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-status">Status</label>
+          <select id="f-status" name="status">
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+            <option value="OutOfStock">Out of stock</option>
+            <option value="Discontinued">Discontinued</option>
+          </select>
+        </div>
+        <div class="panel-actions">
+          <button type="button" id="cancel-btn" class="btn btn-ghost">
+            Cancel
+          </button>
+          <button type="submit" class="btn">Save</button>
+        </div>
+      </form>
+    </aside>
+
+    <div class="toast" id="toast"></div>
+
+    <script type="module" src="../dist/app.js"></script>
+  </body>
+</html>
