@@ -126,23 +126,23 @@ console.log(volume, brightness);
 //interface
 //An interface in TypeScript defines the shape of an object
 //— what properties and methods it must have, without giving the actual implementation.
-interface User {
-  name: string;
-  email: string;
-  password: string;
-  gender?: string;
-}
-function getDataofUser(obj: User) {
-  let name = obj.name;
-  let email = obj.email;
-  let password = obj.password;
-  console.log(name, email, password);
-}
-getDataofUser({
-  name: 'Upendra',
-  email: 'hasta@gmail.com',
-  password: 'Jhfvhnrifuf#789',
-});
+// interface User {
+//   name: string;
+//   email: string;
+//   password: string;
+//   gender?: string;
+// }
+// function getDataofUserr(obj: User) {
+//   let name = obj.name;
+//   let email = obj.email;
+//   let password = obj.password;
+//   console.log(name, email, password);
+// }
+// getDataofUserr({
+//   name: 'Upendra',
+//   email: 'hasta@gmail.com',
+//   password: 'Jhfvhnrifuf#789',
+// });
 
 ///Extending interfaces
 interface abc {
@@ -198,3 +198,138 @@ friends("sdasd" ,"dasdasd","dasdadas");
 
 
 //Generics
+interface Halua<T>{
+  name:string;
+  age:number;
+  key:T;
+}
+
+//Generic function
+function firstAndLast<T>(arr:T[]):[T,T]{
+  return [arr[0]!,arr[arr.length-1]!];
+}
+
+firstAndLast([10,20,30,40,50]);
+firstAndLast(["abc","sffads","sdasda","dsada"]);
+
+
+//Generic interface
+interface Container <T>{
+  value : T,
+  getValue() : T
+}
+
+const numberContainer:Container<number>={
+  value : 42,
+  getValue(){
+    return this.value;
+  }
+}
+
+const stringContainer :Container<string>={
+  value :"Uops",
+  getValue() {
+    return this.value;
+  },
+}
+
+//Utility types
+//Partial<Interface> make everything inside optional.
+//Required<Interface> make evreything inside required even if it is ?
+//ReadOnly<Interface> make uneditable
+//Pick<Interface,"name" ,"age" > only choose the needed ones.
+//Omit<Interface,"branch">
+//Exclude<Status ,"deleted"> Removes types from a union.
+//Extract<Status ,"active"> opposite of exclude
+//Record<K, T>  Object with K as keys and T as values.
+
+
+
+//Type assertion
+//Type casting
+//Non-null assertion operator ! not null or undefined
+
+
+//Type gurads
+// function printLength(value: string | number) {
+//   console.log(value.length); // error! number has no .length
+// }
+//TypeScript doesn't know if value is a string or number here, so it won't let you use .length (only strings have it).
+// A type guard is a way to check the type of vlaue at run time so that tyepscript can undestand itsm ore speciifc type;
+
+
+//typeof most basic type guard.
+function printValue(value: string | number) {
+  if (typeof value === "string") {
+    console.log(value.toUpperCase());
+  } else {
+    console.log(value.toFixed(2));
+  }
+}
+
+
+//instance of
+//Used to check whether an object is an instance of a particular class.
+class Dog {
+  bark() {
+    console.log("Woof!");
+  }
+}
+
+class Cat {
+  meow() {
+    console.log("Meow!");
+  }
+}
+
+function makeSound(animal: Dog | Cat) {
+  if (animal instanceof Dog) {
+    animal.bark();
+  } else {
+    animal.meow();
+  }
+}
+
+//in operator
+//Used to check whether a property exists in an object.
+
+// type Dog = {
+//   bark: () => void;
+// };
+
+// type Cat = {
+//   meow: () => void;
+// };
+
+// function makeSound(animal: Dog | Cat) {
+//   if ("bark" in animal) {
+//     animal.bark();
+//   } else {
+//     animal.meow();
+//   }
+// }
+
+
+//Coustum Type Guard
+
+interface User {
+  id: string;
+  name: string;
+}
+
+function isUser(value: unknown): value is User {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "id" in value &&
+    "name" in value
+  );
+}
+
+function handleData(data: unknown) {
+  if (isUser(data)) {
+    console.log(data.name); // safe — TS knows data is User
+  } else {
+    console.log("Invalid user data");
+  }
+}
