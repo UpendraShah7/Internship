@@ -1,9 +1,11 @@
-import Reacthookform from '../components/Reacthookform';
+// import Reacthookform from '../components/Reacthookform';
+import Reactzod from '../components/Reactzod';
 
 function App() {
   return (
     <div>
-      <Reacthookform />
+      {/* <Reacthookform /> */}
+      <Reactzod/>
     </div>
   );
 }

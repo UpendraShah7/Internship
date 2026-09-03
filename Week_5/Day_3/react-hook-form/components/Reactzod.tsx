@@ -1,107 +1,43 @@
-////type FormValues = {
-//   name: string;
-//   email: string;
-//   age: number;
-// };
-
-// 2
-// import { useForm } from 'react-hook-form';
-// const { register, handleSubmit } = useForm<FormValues>();
-
-//3
-// /* <input {...register("email")} /> */
-
-//4
-//<form onSubmit={handleSubmit(onSubmit, onError)}></form>
-
 import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { DevTool } from '@hookform/devtools';
-// import axios from 'axios';
+import { schema } from './schema';
+import type { z } from 'zod';
 
-type FormValues = {
-  name: string;
-  email: string;
-  age: number;
-  social: {
-    facebook: string;
-    twitter: string;
-  };
-  phonenumber?: (string | undefined)[];
-  dob: Date;
-  country: string;
-  gender: string;
-  skills: string[];
-};
-
+type FormInput = z.input<typeof schema>;
+type FormValues = z.output<typeof schema>;
+    
 function Reacthookform() {
-  const { register, control, handleSubmit, watch, getValues, setValue, formState ,reset , trigger } =
-    useForm<FormValues>({
-      defaultValues: {
-        name: '',
-        email: '',
-        age: 0,
-        social: {
-          facebook: '',
-          twitter: '',
-        },
-        phonenumber: ['', ''],
-        dob: new Date(),
-        country: '',
-        gender: '',
-        skills: [],
+  const { register, control, handleSubmit, watch, getValues, setValue, formState, reset } = useForm< FormInput, any, FormValues >({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      name: 'Ups',
+      email: '',
+      age: 0,
+      social: {
+        facebook: '',
+        twitter: '',
       },
-      mode: 'onBlur',
-    });
+      phonenumber: ['', ''],
+      dob: new Date(),
+      country: '',
+      gender: '',
+      skills: [],
+    },
+    mode: 'onBlur',
+  });
 
-  //   const {
-  //     register,
-  //     control,
-  //     handleSubmit,
-  //     formState: { errors },
-  //   } = useForm<FormValues>({
-  //     defaultValues: async () => {
-  //       const response = await axios.get('https://jsonplaceholder.typicode.com/users/1');
-  //       return {
-  //         name: response.data.name,
-  //         email: response.data.email,
-  //         age: 0,
-  //       };
-  //     },
-  //   });
-
-  const {
-    errors,
-    dirtyFields,
-    touchedFields,
-    isDirty,
-    isValid,
-    isSubmitting,
-    isSubmitted,
-    isSubmitSuccessful,
-    submitCount,
-  } = formState;
-  console.log(
-    formState,
-    dirtyFields,
-    touchedFields,
-    isDirty,
-    isValid,
-    isSubmitting,
-    isSubmitted,
-    isSubmitSuccessful,
-    submitCount
-  );
+  const { errors, isSubmitting } = formState;
 
   const onSubmit = (data: FormValues) => {
     console.log(data);
+     reset();
   };
 
   const watchForm = watch('name');
 
   const getFormValues = () => {
-    const values = getValues();
-    console.log(values);
-    //console.log("Name:", values.name);
+    console.log(getValues());
   };
 
   const setFormValue = () => {
@@ -112,13 +48,9 @@ function Reacthookform() {
     });
   };
 
-  const onError = (errors: any) => {
-    console.log(errors);
-  };
-
   return (
     <div className="form-page">
-      <form className="hook-form" onSubmit={handleSubmit(onSubmit, onError)}>
+      <form className="hook-form" onSubmit={handleSubmit(onSubmit)}>
         <h2>User Details</h2>
 
         <div className="form-section">
@@ -126,66 +58,26 @@ function Reacthookform() {
 
           <div className="field-group">
             <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              id="name"
-              placeholder="Enter your name"
-              {...register('name', {
-                disabled: false,
-                required: 'Name is required',
-              })}
-            />
+            <input type="text" id="name" placeholder="Enter your name" {...register('name')} />
             {errors.name && <span className="error">{errors.name.message}</span>}
           </div>
 
           <p>{watchForm}</p>
-          {/* <p>JSON: {JSON.stringify(watchForm)}</p> */}
 
           <div className="field-group">
             <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              placeholder="Enter your email"
-              {...register('email', {
-                disabled: watch('name') === '',
-                required: 'Email is required',
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'Invalid email address',
-                },
-                validate: {
-                  Notendwithcom: (value) => {
-                    if (value.endsWith('.com')) {
-                      return true;
-                    }
-                    return 'Email must end with .com';
-                  },
-                },
-              })}
-            />
+            <input type="email" id="email" placeholder="Enter your email" {...register('email')} />
             {errors.email && <span className="error">{errors.email.message}</span>}
           </div>
 
           <div className="field-group-row">
             <div className="field-group">
-              <label htmlFor="age">Age</label>
+              <label htmlFor="age">Age</label> 
               <input
                 type="number"
                 id="age"
                 placeholder="Enter your age"
-                {...register('age', {
-                  required: 'Age is required',
-                  valueAsNumber: true,
-                  min: {
-                    value: 18,
-                    message: 'You must be at least 18 years old',
-                  },
-                  max: {
-                    value: 50,
-                    message: 'You must be under 50 years old',
-                  },
-                })}
+                {...register('age', { valueAsNumber: true })}
               />
               {errors.age && <span className="error">{errors.age.message}</span>}
             </div>
@@ -196,10 +88,9 @@ function Reacthookform() {
                 type="date"
                 id="dob"
                 placeholder="Date of Birth"
-                {...register('dob', {
-                  valueAsDate: true,
-                })}
+                {...register('dob', { valueAsDate: true })}
               />
+              {errors.dob && <span className="error">{errors.dob.message}</span>}
             </div>
           </div>
 
@@ -238,12 +129,10 @@ function Reacthookform() {
               <input type="checkbox" id="grpc" value="grpc" {...register('skills')} />
               <label htmlFor="grpc">gRPC</label>
             </div>
-
             <div className="checkbox-item">
               <input type="checkbox" id="go" value="go" {...register('skills')} />
               <label htmlFor="go">Go</label>
             </div>
-
             <div className="checkbox-item">
               <input type="checkbox" id="python" value="python" {...register('skills')} />
               <label htmlFor="python">Python</label>
@@ -265,7 +154,6 @@ function Reacthookform() {
                 {...register('phonenumber.0')}
               />
             </div>
-
             <div className="field-group">
               <label htmlFor="secondary-phoneno">Secondary Phone</label>
               <input
@@ -308,8 +196,7 @@ function Reacthookform() {
           </div>
         </div>
 
-        {/* <button type="submit" disabled={!isValid}> */}
-        <button type="submit">
+        <button type="submit" disabled={isSubmitting}>
           Submit
         </button>
         <button type="button" onClick={() => reset()}>
