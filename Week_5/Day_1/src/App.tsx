@@ -1,10 +1,10 @@
-import Form from "./useReduce/Form"
+import { Form1 } from "./Form/Form1"
 
 
 function App() {
   return (
     <div>
-      <Form/>
+      <Form1/>
     </div>
   )
 }
