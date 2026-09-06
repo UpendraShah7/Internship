@@ -1,13 +1,11 @@
-import { createRoot } from 'react-dom/client'
-import { CartProvider } from "./store/CartProvider";
-import './index.css'
-import App from './App.tsx'
-import { BrowserRouter } from 'react-router-dom'
+import { createRoot } from 'react-dom/client';
+import { CartProvider } from './CartContext';
+import './index.css';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './App';
 
 createRoot(document.getElementById('root')!).render(
-    <CartProvider>
-    <BrowserRouter>
-    <App />
-   </BrowserRouter>,
-   </CartProvider>
-)
+  <CartProvider>
+    <RouterProvider router={router} /> 
+  </CartProvider>
+);

@@ -1,34 +1,39 @@
-import { useEffect, useState } from "react";
-import ProductCard from "../components/ProductCard";
-import AddProductDrawer from "../components/AddProductDrawer";
-import { getProducts } from "../services/ProductServices";
-import type { Product } from "../types/product";
-import type { ProductFormData } from "../schema/productSchema";
-import { Spin, Button } from "antd";
+import { useEffect, useState } from 'react';
+import ProductCard from '../components/ProductCard';
+import AddProductDrawer from '../components/AddProductDrawer';
+import { getProducts, type Product, type ProductFormData } from '../data';
+import { Spin, Button } from 'antd';
 
 function Products() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
- useEffect(() => {
-  getProducts()
-    .then((data) => {
-      const customProducts = JSON.parse(localStorage.getItem("customProducts") || "[]");
-      setProducts([...customProducts, ...data]);
-    })
-    .catch((err) => console.error("Failed to load products:", err))
-    .finally(() => setLoading(false));
-}, []);
 
-const handleAddProduct = (data: ProductFormData) => {
-  const newProduct: Product = { id: Date.now(), ...data };
 
-  setProducts((prev) => [newProduct, ...prev]);
+  useEffect(() => {
+    getProducts()
+      .then((data) => {
+        const customProducts = JSON.parse(
+          localStorage.getItem('customProducts') || '[]'
+        );
+        setProducts([...customProducts, ...data]);
+      })
+      .catch((err) => console.error('Failed to load products:', err))
+      .finally(() => setLoading(false));
+  }, []);
 
-  const existingCustom = JSON.parse(localStorage.getItem("customProducts") || "[]");
-  localStorage.setItem("customProducts", JSON.stringify([newProduct, ...existingCustom]));
-};
+
+
+
+  const handleAddProduct = (data: ProductFormData) => {
+    const newProduct: Product = { id: Date.now(), ...data };
+    setProducts((prev) => [newProduct, ...prev]);
+    const existingCustom = JSON.parse( localStorage.getItem('customProducts') || '[]' );
+    localStorage.setItem( 'customProducts', JSON.stringify([newProduct, ...existingCustom]));
+  };
+
+
 
   if (loading) {
     return (
@@ -37,6 +42,8 @@ const handleAddProduct = (data: ProductFormData) => {
       </div>
     );
   }
+
+
 
   return (
     <div className="p-6">
@@ -53,11 +60,7 @@ const handleAddProduct = (data: ProductFormData) => {
         ))}
       </div>
 
-      <AddProductDrawer
-        open={drawerOpen}
-        onClose={() => setDrawerOpen(false)}
-        onAdd={handleAddProduct}
-      />
+      <AddProductDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} onAdd={handleAddProduct} />
     </div>
   );
 }

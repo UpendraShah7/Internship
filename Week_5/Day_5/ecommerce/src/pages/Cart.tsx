@@ -1,13 +1,13 @@
-import { Link } from "react-router-dom";
-import { useCart } from "../store/CartProvider";
-import { message } from "antd";
+import { Link } from 'react-router-dom';
+import { useCart } from '../CartContext';
+import { message } from 'antd';
 
 function Cart() {
-  const { cart, removeFromCart, updateQuantity } = useCart();
+  const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-    const handleRemove = (id: number, title: string) => {
+  const handleRemove = (id: number, title: string) => {
     removeFromCart(id);
     message.success(`${title} removed`);
   };
@@ -15,8 +15,12 @@ function Cart() {
   if (cart.length === 0) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4">
-        <p className="text-xl font-semibold text-gray-700 mb-2">Your cart is empty</p>
-        <p className="text-gray-500 mb-6">Looks like you haven't added anything yet.</p>
+        <p className="text-xl font-semibold text-gray-700 mb-2">
+          Your cart is empty
+        </p>
+        <p className="text-gray-500 mb-6">
+          Looks like you haven't added anything yet.
+        </p>
         <Link
           to="/products"
           className="bg-blue-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-blue-700 transition-colors"
@@ -45,13 +49,16 @@ function Cart() {
 
             <div className="flex-1 min-w-0">
               <p className="font-semibold truncate">{item.title}</p>
-              <p className="text-gray-500 text-sm mt-1">${item.price.toFixed(2)} each</p>
+              <p className="text-gray-500 text-sm mt-1">
+                ${item.price.toFixed(2)} each
+              </p>
             </div>
 
-           
             <div className="flex items-center border border-gray-300 rounded-lg">
               <button
-                onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
+                onClick={() =>
+                  updateQuantity(item.id, Math.max(1, item.quantity - 1))
+                }
                 className="px-3 py-1 text-gray-600 hover:bg-gray-100 rounded-l-lg"
               >
                 -
@@ -79,7 +86,13 @@ function Cart() {
         ))}
       </div>
 
-      
+      <button
+        onClick={clearCart}
+        className="mt-4 ml-auto block rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-sm font-semibold text-red-600 transition-colors hover:border-red-300 hover:bg-red-100 hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-red-200"
+      >
+        Clear Cart
+      </button>
+
       <div className="mt-8 bg-gray-50 border border-gray-200 rounded-xl p-6 flex items-center justify-between">
         <div>
           <p className="text-gray-500 text-sm">Order Total</p>

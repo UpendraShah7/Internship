@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { useCart } from "../store/CartProvider";
+import { Link } from 'react-router-dom';
+import { useCart } from '../CartContext';
 
 function Navbar() {
   const { cart } = useCart();
@@ -7,17 +7,21 @@ function Navbar() {
   return (
     <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-200">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-       
-        <Link to="/" className="text-2xl font-extrabold text-blue-600 tracking-tight">
+        <Link
+          to="/"
+          className="text-2xl font-extrabold text-blue-600 tracking-tight"
+        >
           Sasto
         </Link>
 
-      
         <div className="flex items-center gap-8 text-gray-700 font-medium">
           <Link to="/" className="hover:text-blue-600 transition-colors">
             Home
           </Link>
-          <Link to="/products" className="hover:text-blue-600 transition-colors">
+          <Link
+            to="/products"
+            className="hover:text-blue-600 transition-colors"
+          >
             Products
           </Link>
           <Link
@@ -36,6 +40,12 @@ function Navbar() {
             className="bg-blue-600 text-white px-4 py-1.5 rounded-lg hover:bg-blue-700 transition-colors"
           >
             Login
+          </Link>
+          <Link
+            to="/admin"
+            className="flex items-center justify-center h-8 w-8 rounded-full bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition-colors"
+          >
+            US
           </Link>
         </div>
       </div>

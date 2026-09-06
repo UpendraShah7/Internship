@@ -1,24 +1,32 @@
-import { Route, Routes } from "react-router-dom"
-import Home from "./pages/Home"
-import Navbar from "./components/Navbar"
-import Products from "./pages/Product"
-import Cart from "./pages/Cart"
-import Login from "./pages/Login"
+import { createBrowserRouter, Outlet } from 'react-router-dom';
+import Home from './pages/Home';
+import Navbar from './components/Navbar';
+import Products from './pages/Product';
+import Cart from './pages/Cart';
+import Login from './pages/Login';
+import ProductDetail from './pages/ProductDetail';
 
-
-function App() {
+function Layout() {
   return (
-    
     <div>
-      <Navbar/>
-          <Routes>
-            <Route path="/" element={<Home />} />
-             <Route path="/products" element={<Products />} />
-             <Route path="/cart" element={<Cart />} />
-             <Route path="/login" element={<Login />} />
-          </Routes>
+      <Navbar />
+       <div className="container mx-auto px-4">
+      <Outlet />
+      </div>
     </div>
-  )
+  );
 }
 
-export default App
+export const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: 'products', element: <Products /> },
+      { path: 'cart', element: <Cart /> },
+      { path: 'login', element: <Login /> },
+      { path: 'products/:id', element: <ProductDetail /> },
+    ],
+  },
+]);

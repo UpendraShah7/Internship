@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { Card } from 'antd';
-import { useCart } from '../store/CartProvider';
-import type { Product } from '../types/product';
+import { useCart } from '../CartContext';
+import type { Product } from '../data';
 
 function ProductCard({ id, title, price, image }: Product) {
   const { addToCart } = useCart();
@@ -13,33 +12,24 @@ function ProductCard({ id, title, price, image }: Product) {
   };
 
   return (
-    <Card
-      hoverable
-      className="rounded-xl overflow-hidden"
-      style={{ borderColor: '#e5e7eb' }}
-      cover={
-        <img
-          src={image}
-          alt={title}
-          className="h-40 w-full object-contain p-4"
-        />
-      }
-      onClick={() => navigate(`/products/${id}`)}
-      actions={[
+    <div className="overflow-hidden rounded-xl border border-gray-200 bg-white transition-shadow hover:shadow-md"
+      onClick={() => navigate(`/products/${id}`)} >
+      <img src={image} alt={title} className="h-40 w-full object-contain p-4" />
+
+      <div className="p-4">
+        <div className="mb-4">
+          <h3 className="line-clamp-1 font-semibold">{title}</h3>
+          <p className="text-gray-600">${price}</p>
+        </div>
+
         <button
-          key="add"
           onClick={handleAddToCart}
-          className="w-[90%] bg-blue-600 text-white py-1.5 rounded hover:bg-blue-700 transition-colors"
+          className="w-full rounded bg-blue-600 py-1.5 text-white transition-colors hover:bg-blue-700"
         >
           Add to Cart
-        </button>,
-      ]}
-    >
-      <Card.Meta
-        title={<span className="line-clamp-1">{title}</span>}
-        description={<span className="text-gray-600">${price}</span>}
-      />
-    </Card>
+        </button>
+      </div>
+    </div>
   );
 }
 
