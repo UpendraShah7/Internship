@@ -51,6 +51,9 @@ h1 { font-size: clamp(2.5rem, 6vw, 4.7rem); line-height: .98; margin: 0; max-wid
 .post-item { align-items: baseline; border-bottom: 1px solid #d9d5cc; display: flex; gap: 28px; padding: 25px 0; }
 .post-number { color: #c46b45; font-family: 'Space Grotesk', sans-serif; font-size: .85rem; font-weight: 700; }
 .post-item h2 { font-size: clamp(1.1rem, 2vw, 1.55rem); margin: 0; text-transform: capitalize; }
+.delete-button { background: transparent; border: 1px solid #b65048; border-radius: 4px; color: #b65048; cursor: pointer; font-size: .85rem; font-weight: 700; margin-left: auto; padding: 8px 12px; transition: background .2s, color .2s, transform .2s; }
+.delete-button:hover { background: #b65048; color: #fff; transform: translateY(-2px); }
+.delete-button:focus-visible { outline: 3px solid #f6c85f; outline-offset: 3px; }
 .status { color: #68747b; font-size: 1.2rem; padding: 60px 0; }
 .status-error { color: #b65048; }
 .pagination { align-items: center; display: flex; gap: 18px; justify-content: flex-end; margin-top: 30px; }

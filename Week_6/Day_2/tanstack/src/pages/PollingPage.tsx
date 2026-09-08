@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { useState } from 'react';
 
@@ -16,11 +16,22 @@ const getLatestPosts = async (page: number): Promise<Post[]> => {
 
 function PollingPage() {
   const [page, setPage] = useState(1);
+  const queryClient = useQueryClient();
+
+  const deleteMutation = useMutation({
+    mutationFn: (id: number) =>
+      axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`),
+    onSuccess: (_, deletedId) => {
+      queryClient.setQueryData<Post[]>(['latest-posts', page], (posts) =>
+        posts?.filter((post) => post.id !== deletedId)
+      );
+    },
+  });
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['latest-posts', page],
     queryFn: () => getLatestPosts(page),
-    refetchInterval: 1 * 1000, // poll every 10 seconds while this page is open
+    refetchInterval: 100 * 1000, // poll every 100 seconds while this page is open
     refetchIntervalInBackground: true, // keep polling even if the tab loses focus
   });
 
@@ -56,6 +67,12 @@ function PollingPage() {
               {String((page - 1) * 5 + index + 1).padStart(2, '0')}
             </span>
             <h2>{post.title}</h2>
+            <button
+              onClick={() => deleteMutation.mutate(post.id)}
+              className="delete-button"
+            >
+              Delete
+            </button>
           </article>
         ))}
       </section>
