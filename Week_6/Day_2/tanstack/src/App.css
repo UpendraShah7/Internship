@@ -53,6 +53,12 @@ h1 { font-size: clamp(2.5rem, 6vw, 4.7rem); line-height: .98; margin: 0; max-wid
 .post-item h2 { font-size: clamp(1.1rem, 2vw, 1.55rem); margin: 0; text-transform: capitalize; }
 .status { color: #68747b; font-size: 1.2rem; padding: 60px 0; }
 .status-error { color: #b65048; }
+.pagination { align-items: center; display: flex; gap: 18px; justify-content: flex-end; margin-top: 30px; }
+.pagination span { color: #68747b; font-size: .9rem; font-weight: 700; }
+.pagination-button { background: #173f5f; border: 0; border-radius: 4px; color: #f8f6f0; cursor: pointer; font-weight: 700; padding: 11px 16px; transition: background .2s, transform .2s; }
+.pagination-button:hover:not(:disabled) { background: #286052; transform: translateY(-2px); }
+.pagination-button:focus-visible { outline: 3px solid #f6c85f; outline-offset: 3px; }
+.pagination-button:disabled { background: #d9d5cc; color: #8b9295; cursor: not-allowed; }
 
 @media (max-width: 650px) {
 	.site-nav { padding: 18px 20px; }

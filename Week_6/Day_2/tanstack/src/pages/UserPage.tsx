@@ -19,8 +19,8 @@ function UsersPage() {
   const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ['users'],
     queryFn: getUsers,
-    staleTime: 10 * 1000, 
-    gcTime: 10 * 1000, 
+    staleTime: 60 * 1000, 
+    gcTime: 60 * 1000, 
   });
 
   if (isLoading)
