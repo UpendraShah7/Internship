@@ -1,29 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
 import { useParams, Link } from 'react-router-dom';
-import axios from 'axios';
-
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
-
-const getUser = async (id: string): Promise<User> => {
-  const { data } = await axios.get<User>(
-    `https://jsonplaceholder.typicode.com/users/${id}`
-  );
-  return data;
-};
+import { useUserQuery } from './user.queries';
 
 function UserDetailPage() {
   const { id } = useParams<{ id: string }>();
-
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ['user', id],
-    queryFn: () => getUser(id as string),
-    staleTime: 5 * 60 * 1000,
-    gcTime: 5 * 60 * 1000,
-  });
+  const { data, isLoading, isError, error } = useUserQuery(id as string);
 
   if (isLoading)
     return (

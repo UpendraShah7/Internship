@@ -1,27 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
+// ── component ── src/features/users/UsersPage.tsx
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
-
-const getUsers = async (): Promise<User[]> => {
-  const { data } = await axios.get<User[]>(
-    'https://jsonplaceholder.typicode.com/users'
-  );
-  return data;
-};
+import { useUsersQuery } from './user.queries';
 
 function UsersPage() {
-  const { data, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ['users'],
-    queryFn: getUsers,
-    staleTime: 60 * 1000, 
-    gcTime: 60 * 1000, 
-  });
+  const { data, isLoading, isError, error, refetch } = useUsersQuery();
 
   if (isLoading)
     return (

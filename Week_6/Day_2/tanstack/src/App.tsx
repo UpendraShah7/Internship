@@ -1,8 +1,8 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import UsersPage from './pages/UserPage';
-import UserDetailPage from './pages/UserDetail';
-import PollingPage from './pages/PollingPage';
+import UsersPage from './features/users/UserPage';
+import UserDetailPage from './features/users/UserDetailPAge';
+import PollingPage from './features/post/PollingPage';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import './App.css';
 
@@ -28,7 +28,7 @@ function App() {
           <Route path="/polling" element={<PollingPage />} />
         </Routes>
       </BrowserRouter>
-       <ReactQueryDevtools initialIsOpen={false} />
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }
