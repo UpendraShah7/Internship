@@ -1,11 +1,18 @@
 import { useState } from 'react';
-import { usePostsQuery, useDeletePostMutation } from './post.queries';
+import {
+  usePostsQuery,
+  useDeletePostMutation,
+  useUpdatePostMutation,
+  useCreatePostMutation,
+} from './post.queries';
 
 function PollingPage() {
   const [page, setPage] = useState(1);
 
   const { data, isLoading, isError, error } = usePostsQuery(page);
   const deleteMutation = useDeletePostMutation(page);
+  const updateMutation = useUpdatePostMutation(page);
+  const createMutation = useCreatePostMutation(page);
 
   if (isLoading)
     return (
@@ -32,6 +39,15 @@ function PollingPage() {
           <span /> Live
         </span>
       </header>
+
+      <button
+        className="create-button"
+        onClick={() =>
+          createMutation.mutate({ title: 'New Post' })
+        }
+      >
+        Create Post
+      </button>
       <section className="post-list" aria-label="Latest posts">
         {data?.map((post, index) => (
           <article className="post-item" key={post.id}>
@@ -39,6 +55,18 @@ function PollingPage() {
               {String((page - 1) * 5 + index + 1).padStart(2, '0')}
             </span>
             <h2>{post.title}</h2>
+
+            <button
+              className="update-button"
+              onClick={() =>
+                updateMutation.mutate({
+                  id: post.id,
+                  post: { title: 'New title updated' },
+                })
+              }
+            >
+              Update
+            </button>
             <button
               onClick={() => deleteMutation.mutate(post.id)}
               className="delete-button"

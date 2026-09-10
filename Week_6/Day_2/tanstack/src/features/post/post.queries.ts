@@ -29,3 +29,31 @@ export const useDeletePostMutation = (page: number) => {
     },
   });
 };
+
+export const useUpdatePostMutation = (page: number) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ id, post }: { id: number; post: Partial<Post> }) =>
+      postApi.update(id, post),
+    onSuccess: (data, { id }) => {
+      queryClient.setQueryData<Post[]>(postKeys.list(page), (posts) =>
+        posts?.map((post) => (post.id === id ? data : post))
+      );
+    },
+  });
+};
+
+
+export const useCreatePostMutation = (page: number) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (post: Omit<Post, 'id'>) => postApi.create(post),
+    onSuccess: (data) => {
+      queryClient.setQueryData<Post[]>(postKeys.list(page), (posts) =>
+        posts ? [data, ...posts] : [data]
+      );
+    },
+  });
+};
