@@ -29,7 +29,7 @@ export const useDeletePostMutation = (page: number) => {
 
       const previousPosts = queryClient.getQueryData<Post[]>(queryKey);
 
-      // remove it from the UI immediately
+     
       queryClient.setQueryData<Post[]>(queryKey, (posts) =>
         posts?.filter((post) => post.id !== deletedId)
       );
@@ -58,22 +58,19 @@ export const useUpdatePostMutation = (page: number) => {
       postApi.update(id, post),
 
     onMutate: async ({ id, post }) => {
-      // stop any background refetch from overwriting our optimistic edit
+     
       await queryClient.cancelQueries({ queryKey });
-
-      // snapshot current list (for rollback)
+     
       const previousPosts = queryClient.getQueryData<Post[]>(queryKey);
 
-      // apply the edit to the cache RIGHT NOW, before server responds
       queryClient.setQueryData<Post[]>(queryKey, (posts) =>
         posts?.map((p) => (p.id === id ? { ...p, ...post } : p))
       );
 
-      return { previousPosts }; // passed to onError/onSettled as "context"
+      return { previousPosts }; 
     },
 
     onError: (_err, _variables, context) => {
-      // request failed → roll back to the snapshot
       if (context?.previousPosts) {
         queryClient.setQueryData(queryKey, context.previousPosts);
       }
