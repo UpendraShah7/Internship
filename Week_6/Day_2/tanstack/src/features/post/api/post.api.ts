@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { postListSchema, postSchema, type Post } from './post.schema';
+import { postListSchema, postSchema, type Post } from '../schema/post.schema';
 
 const BASE_URL = 'https://jsonplaceholder.typicode.com/posts';
 

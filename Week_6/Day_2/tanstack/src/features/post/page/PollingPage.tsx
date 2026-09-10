@@ -4,7 +4,7 @@ import {
   useDeletePostMutation,
   useUpdatePostMutation,
   useCreatePostMutation,
-} from './post.queries';
+} from '../hooks/post.queries';
 
 function PollingPage() {
   const [page, setPage] = useState(1);
@@ -42,9 +42,7 @@ function PollingPage() {
 
       <button
         className="create-button"
-        onClick={() =>
-          createMutation.mutate({ title: 'New Post' })
-        }
+        onClick={() => createMutation.mutate({ title: 'New Post' })}
       >
         Create Post
       </button>

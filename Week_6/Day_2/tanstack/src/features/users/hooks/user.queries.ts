@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { userApi } from './user.api';
+import { userApi } from '../api/user.api';
+
 
 export const userKeys = {
   all: ['users'] as const,

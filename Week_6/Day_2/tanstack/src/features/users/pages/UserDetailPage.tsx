@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { useUserQuery } from './user.queries';
+import { useUserQuery } from '../hooks/user.queries';
 
 function UserDetailPage() {
   const { id } = useParams<{ id: string }>();

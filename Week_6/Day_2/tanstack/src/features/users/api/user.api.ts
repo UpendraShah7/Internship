@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { userSchema, userListSchema, type User } from './user.schema';
+import {
+  userListSchema,
+  userSchema,
+  type User,
+} from '../schema/user.schema';
+
 
 const BASE_URL = 'https://jsonplaceholder.typicode.com/users';
 

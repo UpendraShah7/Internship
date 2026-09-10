@@ -1,6 +1,5 @@
-// ── component ── src/features/users/UsersPage.tsx
 import { Link } from 'react-router-dom';
-import { useUsersQuery } from './user.queries';
+import { useUsersQuery } from '../hooks/user.queries';
 
 function UsersPage() {
   const { data, isLoading, isError, error, refetch } = useUsersQuery();
