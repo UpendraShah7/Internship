@@ -14,7 +14,7 @@ export const usePostsQuery = (page: number) =>
     refetchInterval: 100 * 1000,
     refetchIntervalInBackground: true,
     staleTime: 8 * 1000,
-    gcTime: 10 * 1000,
+    gcTime: 12 * 1000,
   });
 
 export const useDeletePostMutation = (page: number) => {

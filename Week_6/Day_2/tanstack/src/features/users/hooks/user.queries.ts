@@ -11,8 +11,8 @@ export const useUsersQuery = () =>
   useQuery({
     queryKey: userKeys.all,
     queryFn: userApi.getAll,
-    staleTime: 10 * 1000,
-    gcTime: 30 * 1000,
+    staleTime: 8 * 1000,
+    gcTime: 12 * 1000,
   });
 
 export const useUserQuery = (id: string) =>
