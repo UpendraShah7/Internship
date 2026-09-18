@@ -1,6 +1,7 @@
 import './App.css';
 import { UserForm } from './modules/users/components/UserForm';
-import UserTable from './modules/users/components/UserTAble';
+import UserTable from './modules/users/components/UserTable';
+
 import { useUsersStore } from './modules/users/store/users.store';
 import type { User } from './modules/users/types/user.types';
 

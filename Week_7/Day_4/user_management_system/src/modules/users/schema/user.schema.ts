@@ -10,7 +10,7 @@ export const getUserSchema = (isEditMode: boolean) =>
 
       email: z
         .string()
-        .min(1, 'Email is required')
+        .min(1, 'Valdiation')
         .email('Enter a valid email address'),
 
       password: z.string().optional(),
