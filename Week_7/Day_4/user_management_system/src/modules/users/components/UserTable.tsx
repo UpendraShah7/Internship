@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Button, Space, Empty } from 'antd';
+import { Table, Button, Space, Empty ,Popconfirm  } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import type { User } from '../types/user.types';
 
@@ -43,9 +43,14 @@ const UserTable: React.FC<UserTableProps> = ({ users, onEdit, onDelete }) => {
       render: (_, record) => (
         <Space>
           <Button onClick={() => onEdit(record)}>Edit</Button>
-          <Button danger onClick={() => onDelete(record.id)}>
-            Delete
-          </Button>
+          <Popconfirm
+            title="Are you sure you want to delete this user?"
+            onConfirm={() => onDelete(record.id)}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Button danger>Delete</Button>
+          </Popconfirm>
         </Space>
       ),
     },
@@ -58,7 +63,7 @@ const UserTable: React.FC<UserTableProps> = ({ users, onEdit, onDelete }) => {
       rowKey="id"
       locale={{
         emptyText: <Empty description="No users found" />,
-      }}
+      }} 
     />
   );
 };

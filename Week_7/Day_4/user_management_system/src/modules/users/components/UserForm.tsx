@@ -6,7 +6,7 @@ import { getUserSchema } from '../schema/user.schema';
 import { type User, type UserFormValues } from '../types/user.types';
 import { useUsersStore } from '../store/users.store';
 
-const SKILL_OPTIONS = ['React', 'Node.js', 'TypeScript', 'SQL', 'Python'];
+const SKILL_OPTIONS = ['React', 'Node.js', 'TypeScript', 'SQL'];
 const COUNTRY_OPTIONS = ['Nepal', 'India', 'USA', 'UK', 'Australia'];
 
 const defaultValues: UserFormValues = {

@@ -1,9 +1,8 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import ProtectedRoute from '../modules/auth/components/ProtectedRoute';
-import RegisterPage from '../modules/auth/pages/RegisterPage';
 import LoginPage from '../modules/auth/pages/LoginPage';
-import UsersPage from '../modules/auth/pages/UserPage';
-
+import RegisterPage from '../modules/auth/pages/RegisterPage';
+import UsersPage from '../modules/users/pages/UsersPage';
 
 const router = createBrowserRouter([
   {
