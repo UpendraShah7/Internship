@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Button, Drawer } from 'antd';
+import { useState, useMemo } from 'react';
+import { Button, Drawer, Input } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { UserForm } from '../components/UserForm';
@@ -8,12 +8,23 @@ import { useUsersStore } from '../store/users.store';
 import useAuthStore from '../../auth/store/auth.store';
 import type { User } from '../types/user.types';
 
+const { Search } = Input;
+
 const UsersPage: React.FC = () => {
   const navigate = useNavigate();
   const { users, deleteUser } = useUsersStore();
   const logout = useAuthStore((state) => state.logout);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [editingUser, setEditingUser] = useState<User | null>(null);
+  const [searchText, setSearchText] = useState('');
+
+  const filteredUsers = useMemo(() => {
+    return users.filter(
+      (user) =>
+        user.fullName.toLowerCase().includes(searchText.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchText.toLowerCase())
+    );
+  }, [users, searchText]);
 
   const handleLogout = () => {
     logout();
@@ -26,14 +37,15 @@ const UsersPage: React.FC = () => {
   };
 
   const handleEdit = (user: User) => {
-    setEditingUser(user); 
+    setEditingUser(user);
     setDrawerOpen(true);
   };
 
   const handleDrawerClose = () => {
     setDrawerOpen(false);
-    setEditingUser(null); 
+    setEditingUser(null);
   };
+
   return (
     <main className="user-page">
       <section className="user-page-header" aria-labelledby="user-page-title">
@@ -45,11 +57,7 @@ const UsersPage: React.FC = () => {
           </p>
         </div>
         <div className="user-page-actions">
-          <Button
-            type="primary"
-            icon={<PlusOutlined />}
-            onClick={handleAddClick}
-          >
+          <Button type="primary" icon={<PlusOutlined />} onClick={handleAddClick}>
             Add User
           </Button>
           <Button onClick={handleLogout} style={{ marginLeft: 8 }}>
@@ -65,10 +73,18 @@ const UsersPage: React.FC = () => {
             <h2 id="user-table-title">All users</h2>
           </div>
           <span className="user-count">
-            {users.length} {users.length === 1 ? 'member' : 'members'}
+            {filteredUsers.length} {filteredUsers.length === 1 ? 'member' : 'members'}
           </span>
         </div>
-        <UserTable users={users} onEdit={handleEdit} onDelete={deleteUser} />
+
+        <Search
+          placeholder="Search by name or email"
+          onChange={(e) => setSearchText(e.target.value)}
+          style={{ width: 300, marginBottom: 16 }}
+          allowClear
+        />
+
+        <UserTable users={filteredUsers} onEdit={handleEdit} onDelete={deleteUser} />
       </section>
 
       <Drawer
@@ -78,10 +94,7 @@ const UsersPage: React.FC = () => {
         width={400}
         className="user-drawer"
       >
-        <UserForm
-          editingUser={editingUser}
-          onDone={handleDrawerClose}
-        />
+        <UserForm editingUser={editingUser} onDone={handleDrawerClose} />
       </Drawer>
     </main>
   );
