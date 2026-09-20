@@ -1,0 +1,145 @@
+ :root {
+	color: #182230;
+	background: #edf1f4;
+	font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	min-width: 320px;
+	min-height: 100vh;
+	background:
+		radial-gradient(circle at 12% 8%, rgba(238, 120, 82, 0.16), transparent 28%),
+		linear-gradient(135deg, #f7f8f6 0%, #e8eef1 100%);
+}
+
+button,
+input,
+select {
+	font: inherit;
+}
+
+.app-shell {
+	display: grid;
+	grid-template-columns: minmax(0, 680px);
+	justify-content: center;
+	gap: 28px;
+	min-height: 100vh;
+	padding: 48px 20px;
+	place-items: center;
+}
+
+.form-panel,
+.table-panel {
+	width: min(100%, 680px);
+}
+
+.form-panel {
+	width: min(100%, 680px);
+	padding: clamp(28px, 5vw, 54px);
+	border: 1px solid rgba(24, 34, 48, 0.09);
+	border-radius: 18px;
+	background: rgba(255, 255, 255, 0.94);
+	box-shadow: 0 24px 60px rgba(28, 45, 58, 0.12);
+}
+
+.form-intro {
+	margin-bottom: 34px;
+}
+
+.eyebrow {
+	margin: 0 0 10px;
+	color: #d85f42;
+	font-size: 2 rem;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+  text-align: center;
+
+}
+
+h1 {
+	margin: 0;
+	color: #172536;
+	font-family: Georgia, 'Times New Roman', serif;
+	font-size: clamp(2rem, 5vw, 3rem);
+	font-weight: 600;
+	line-height: 1.05;
+}
+
+.intro-copy {
+	max-width: 48ch;
+	margin: 14px 0 0;
+	color: #687582;
+	font-size: 0.98rem;
+	line-height: 1.6;
+}
+
+.ant-form-item {
+	margin-bottom: 22px;
+}
+
+.ant-form-item-label > label {
+	color: #344454 !important;
+	font-size: 0.82rem;
+	font-weight: 700;
+}
+
+.ant-input,
+.ant-input-affix-wrapper,
+.ant-select-selector {
+	min-height: 44px !important;
+	border-color: #d5dde2 !important;
+	border-radius: 8px !important;
+	box-shadow: none !important;
+}
+
+.ant-input:focus,
+.ant-input-affix-wrapper-focused,
+.ant-select-focused .ant-select-selector {
+	border-color: #d85f42 !important;
+	box-shadow: 0 0 0 3px rgba(216, 95, 66, 0.12) !important;
+}
+
+.ant-radio-wrapper,
+.ant-checkbox-wrapper {
+	color: #526170;
+}
+
+.ant-radio-checked .ant-radio-inner,
+.ant-checkbox-checked .ant-checkbox-inner {
+	border-color: #d85f42 !important;
+	background-color: #d85f42 !important;
+}
+
+.ant-btn-primary {
+	min-width: 150px;
+	height: 44px;
+	border: 0;
+	border-radius: 8px;
+	background: #172536;
+	box-shadow: 0 8px 18px rgba(23, 37, 54, 0.18);
+	font-weight: 700;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+	background: #d85f42 !important;
+}
+
+@media (max-width: 520px) {
+	.app-shell {
+		padding: 20px 12px;
+	}
+
+	.form-panel {
+		padding: 28px 20px 24px;
+		border-radius: 14px;
+	}
+}
