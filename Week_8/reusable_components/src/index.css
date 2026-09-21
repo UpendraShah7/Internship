@@ -1,0 +1,165 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap");
+
+:root {
+	font-family: "DM Sans", sans-serif;
+	color: #18212f;
+	background: #e9eef2;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	min-width: 320px;
+	min-height: 100vh;
+	margin: 0;
+	background:
+		radial-gradient(circle at 10% 0%, rgba(255, 255, 255, 0.9), transparent 32rem),
+		linear-gradient(135deg, #e6edf0 0%, #f7f4ed 52%, #dfe8e5 100%);
+}
+
+#root {
+	min-height: 100vh;
+	padding: 48px 20px;
+}
+
+form {
+	width: min(100%, 860px);
+	margin: 0 auto;
+	padding: clamp(24px, 5vw, 52px);
+	border: 1px solid rgba(255, 255, 255, 0.85);
+	border-radius: 18px;
+	background: rgba(255, 255, 255, 0.86);
+	box-shadow: 0 24px 70px rgba(35, 52, 66, 0.14);
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 22px 24px;
+}
+
+form > div {
+	min-width: 0;
+}
+
+label,
+form > div > p {
+	display: block;
+	margin: 0 0 8px;
+	color: #334155;
+	font-size: 0.86rem;
+	font-weight: 700;
+	letter-spacing: 0.02em;
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+	width: 100%;
+	border: 1px solid #cbd5dc;
+	border-radius: 9px;
+	background: #fff;
+	color: #18212f;
+	font: inherit;
+	font-size: 0.96rem;
+	outline: none;
+	transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+select {
+	min-height: 44px;
+	padding: 0 13px;
+}
+
+textarea {
+	min-height: 112px;
+	padding: 12px 13px;
+	resize: vertical;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):focus,
+select:focus,
+textarea:focus {
+	border-color: #16796f;
+	box-shadow: 0 0 0 3px rgba(22, 121, 111, 0.14);
+}
+
+form > div > div {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+form > div > div > input:not([type="checkbox"]):not([type="radio"]),
+form > div > div > select {
+	flex: 1;
+}
+
+form > div > div > span {
+	color: #64748b;
+	font-size: 0.9rem;
+	font-weight: 700;
+	white-space: nowrap;
+}
+
+form > div:has(input[type="checkbox"]),
+form > div:has(input[type="radio"]) {
+	padding: 14px 16px;
+	border: 1px solid #d8e0e4;
+	border-radius: 10px;
+	background: #f7faf9;
+}
+
+form > div:has(input[type="checkbox"]) label,
+form > div:has(input[type="radio"]) label {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	margin: 0 16px 0 0;
+	color: #475569;
+	font-size: 0.92rem;
+	font-weight: 500;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+	accent-color: #16796f;
+}
+
+form > button {
+	grid-column: 1 / -1;
+	min-height: 48px;
+	margin-top: 8px;
+	border: 0;
+	border-radius: 9px;
+	background: #16796f;
+	color: #fff;
+	cursor: pointer;
+	font: inherit;
+	font-weight: 700;
+	transition: background 160ms ease, transform 160ms ease;
+}
+
+form > button:hover {
+	background: #105d56;
+	transform: translateY(-1px);
+}
+
+form > button:focus-visible {
+	outline: 3px solid rgba(22, 121, 111, 0.28);
+	outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+	#root {
+		padding: 20px 12px;
+	}
+
+	form {
+		grid-template-columns: 1fr;
+		padding: 24px 18px;
+		gap: 18px;
+	}
+}
