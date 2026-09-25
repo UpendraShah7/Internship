@@ -1,28 +1,42 @@
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { step1Schema, type Step1Data } from '../schemas/stepSchema';
 import { useFormStore } from '../store/useFormStore';
 import { FormTextField } from '../shared/components/form';
 
-export function Step1() {
-  const { data, setData, nextStep } = useFormStore();
+interface Step1Props {
+  title?: string;
+  signalParent?: (state: { isValid: boolean; goto?: number }) => void;
+  onNext?: () => void;
+}
 
-  const { control, handleSubmit } = useForm<Step1Data>({
+export function Step1({ signalParent, onNext }: Step1Props) {
+  const { data, setData } = useFormStore();
+
+  const { control, watch, formState } = useForm<Step1Data>({
     resolver: zodResolver(step1Schema),
+    mode: 'onChange',
     defaultValues: { name: data.name ?? '', email: data.email ?? '' },
   });
 
-  const onNext = (values: Step1Data) => {
-    setData(values);
-    nextStep();
-  };
+  useEffect(() => {
+    signalParent?.({ isValid: formState.isValid, goto: 1 });
+  }, [formState.isValid, signalParent]);
+
+  useEffect(() => {
+    const subscription = watch((values) => setData(values));
+    return () => subscription.unsubscribe(); 
+  }, [watch, setData]);
 
   return (
-    <form className="multi-step-form" onSubmit={handleSubmit(onNext)}>
+    <form>
       <FormTextField name="name" control={control} label="Name" />
       <FormTextField name="email" control={control} label="Email" />
-      <div className="button-row single-button">
-        <button type="submit">Next</button>
+      <div className="button-row">
+        <button type="button" onClick={onNext} disabled={!formState.isValid}>
+          Next
+        </button>
       </div>
     </form>
   );
