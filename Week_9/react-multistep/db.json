@@ -1,0 +1,21 @@
+{
+  "registrations": [
+    {
+      "fullName": "Ups Hill",
+      "email": "niqufygoce@mailinator.com",
+      "address": "Eu quidem in ut veli",
+      "city": "Quis id adipisci ex ",
+      "paymentMethod": "cod",
+      "id": "zYfS4zsxFE0"
+    },
+    {
+      "fullName": "Sudeep",
+      "email": "sudeep@gmail.com",
+      "address": "lalitpur",
+      "city": "ktm",
+      "paymentMethod": "card",
+      "id": "DU8oqSuKG50"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
